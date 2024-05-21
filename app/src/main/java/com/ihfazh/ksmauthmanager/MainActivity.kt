@@ -4,6 +4,7 @@ package com.ihfazh.ksmauthmanager
 import android.accounts.Account
 import android.accounts.AccountAuthenticatorResponse
 import android.accounts.AccountManager
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -75,6 +76,10 @@ class MainActivity : ComponentActivity() {
         loginResponse.putString(AccountManager.KEY_AUTHTOKEN, token)
         authenticatorResponse?.onResult(loginResponse)
 
+        val intentResult = Intent().apply {
+            putExtras(loginResponse)
+        }
+        setResult(Activity.RESULT_OK, intentResult)
         finish()
     }
 
